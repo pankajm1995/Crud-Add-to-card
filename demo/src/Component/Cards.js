@@ -1,48 +1,45 @@
-import React, { useState } from 'react'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import CardsData from './CardsData'
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import CardsData from "./CardsData";
+import './style.css'
+import { useDispatch } from "react-redux";
+// import ADD from "../redux/actions/action";
+import { ADD } from "../action/action";
 
 const Cards = () => {
+  const [Data] = useState(CardsData);
+  const dispatch = useDispatch()
+  const send = (e)=>{
+    dispatch(ADD(e))
+  }
 
-    const [Data,setData]= useState(CardsData)
+  return (
+    <div className="container mt-3">
+      <h2 className="text-center">Add to Cart Project</h2>
 
-    return (
-        <div>
-           
-            <div className='container'>
-            <h1 className='mt-3'>Add to Cart Project</h1>
-                <div className='row d-flex justify-content-center align-items-center'>
-                    {
-                        Data.map((element,id)=>{
-                            return (
-                                <>
-                                <Card style={{ width: '350px' }} className="mx-2 mt-4 card_style p-0"> 
-                                    <Card.Img variant="top" src={element.imgdata}  style={{height:200}}/>
-                                    <Card.Body>
-                                        <Card.Title>Card Title</Card.Title>
-                                        <Card.Text>
-                                            Some quick example text to build on the card title and make up the
-                                            bulk of the card's content.
-                                        </Card.Text>
-                                        <Button variant="primary">Add to Cart</Button>
-                                    </Card.Body>
-                                </Card>
-                            </>
+      <div className="row d-flex justify-content-center align-items-center">
+        {Data.map((element, id) => {
+          return (
+            <>
+              <Card style={{width: "20rem", border:'none'}} className="mx-2 mt-4 card_style">
+                <Card.Img variant="top" src={element.imgdata} style={{height:200}}/>
+                    <Card.Body>
+                  <Card.Title>{element.rname}</Card.Title>
+                  <Card.Text>
+                    Price : ₹ {element.price}
+                  </Card.Text>
+                  <div className="button_div d-flex justify-content-center ">
+                  <Button variant="primary" onClick={()=>send(element)} className="col-lg-12">Add to Cart</Button>
+                  </div>  
+                </Card.Body>
+              </Card>
+            </>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-                            )
-                        })
-                    }
-
-
-
-                   
-                </div>
-            </div>
-
-
-        </div>
-    )
-}
-
-export default Cards
+export default Cards;

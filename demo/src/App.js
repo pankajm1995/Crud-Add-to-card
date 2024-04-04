@@ -1,16 +1,17 @@
-import './App.css';
-import Header from './Component/Header';
-import {Routes,Route} from 'react-router-dom'
-import Cards from './Component/Cards';
+
+
+import Header from './Component/Header'; 
+import { Routes,Route } from 'react-router-dom';
 import CardsDetails from './Component/CardsDetails';
+import Cards from './Component/Cards'
 function App() {
   return (
     <div className="App">
-    <Header/>
-    <Routes>
-        <Route path='/' element={<Cards></Cards>}></Route>
-        <Route path='/cart' element={<CardsDetails></CardsDetails>}></Route>
-    </Routes>
+        <Header/>
+        <Routes>
+            <Route path='/' element={<Cards/>}/>
+            <Route path='/Cart/:id' element={<CardsDetails/>}/>
+        </Routes>
     </div>
   );
 }
